@@ -4,6 +4,7 @@
     
     <?php echo $form->create('User', array('action' => 'edit/'.$id)); ?>
     <tr><td style="text-align:right;font-size:80%;">Name: </td><td><?php echo $form->input('username', array( 'label' => '')); ?></td></tr>
+    <tr><td style="text-align:right;font-size:80%;">Admin Privileges: </td><td><?php echo $form->input('admin', array( 'label' => '')); ?></td></tr>
     <tr><td style="text-align:right;font-size:80%;">Password: </td><td><?php echo $form->input('password', array('label'=>'','value'=>'')); ?></td></tr>
     <tr><td style="text-align:right;font-size:80%;">Retype Password: </td><td><?php echo $form->input('password2', array('type'=>'password','value'=>'','label'=>'')); ?></td></tr>
     <tr><td></td><td>

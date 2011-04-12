@@ -12,7 +12,7 @@ class EventsController extends AppController {
         }
 	
 	function index () {
-		//$this->set('users',$this->User->find('all'));
+		$this->set('event',$this->Event->find('all'));
 	}
 	
 	function add() {
@@ -47,7 +47,7 @@ class EventsController extends AppController {
 	}
 	
 	function view($id) {
-		
+		$this->set('e',$this->Event->findById($id));
 	}
     
 	function delete($id) {

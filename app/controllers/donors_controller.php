@@ -13,20 +13,18 @@ class DonorsController extends AppController {
         
 	
 	function index () {
-		$this->set('donors',$this->Donor->find('all'));
+		$this->set('donor',$this->Donor->find('all',array('order'=>'Donor.created DESC')));
 	}
 	
 	function add() {
-		$userinfo = $this->Auth->user();
-		/*if ($userinfo['User']['admin']!='1') {
-			$this->redirect(array('controller'=>'pages','action' => 'home'));
-			$this->Session->setFlash('You Do Not Have Permission To Access This Page');
-		}*/
-		$this->set('events', $this->Donor->Event->find('list',array('order'=>'Event.date DESC')));
+		//$userinfo = $this->Auth->user();
+		$this->set('events', $this->Donor->Event->find('list',array('fields'=>array('Event.id','Event.name'),'order'=>'Event.date DESC')));
 		if (!empty($this->data)) {
-			//die(print_r($this->data));
+			if ($this->data['Contact']['type']=='at event') {
+				$this->data['Contact']['event_id']=$this->data['Contact']['ev'];
+			}
 			if ($this->Donor->save($this->data)) {
-				$this->Session->setFlash($this->data['Item']['name'] . '" Successfully Added.');
+				$this->Session->setFlash('"'.$this->data['Donor']['name'] . '" Successfully Added.');
 				$this->redirect(array('controller'=>'donors','action' => 'index'));
 			} else {
 				$this->Session->setFlash('Error: Failed to Save Donor');

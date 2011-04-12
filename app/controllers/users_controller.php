@@ -21,10 +21,15 @@ class UsersController extends AppController {
 	}
 	
 	function index () {
-		//$this->set('users',$this->User->find('all'));
+		$this->set('user',$this->User->find('all'));
 	}
 	
 	function add() {
+		$userinfo = $this->Auth->user();
+		if ($userinfo['User']['admin']=='0') {
+			$this->Session->setFlash('Only Administrators Can Add Users. Please Authenticate As An Administrator And Try Again.');
+			$this->redirect(array('action'=>'login'));
+		}
 		    if (!empty($this->data)) {
 			    $p2 = $this->data['User']['password2'];
 			    if ($this->data['User']['password'] == /*$this->data['User']['password2']*/$this->Auth->password($p2)) {
@@ -52,6 +57,11 @@ class UsersController extends AppController {
 	$this->set('id',$id);
 	    $this->User->id = $id;
 	    $userinfo = $this->Auth->user();
+		if ($userinfo['User']['admin']=='1') {
+			if ($userinfo['User']['admin']=='0') {
+			$this->Session->setFlash('Only Administrators Can Add Users. Please Authenticate As An Administrator And Try Again.');
+			$this->redirect(array('action'=>'login'));
+		}
 	    //die(print_r($userinfo));
 	    if ($userinfo['User']['admin']=='1' || $userinfo['User']['id']==$id) {
 		    if (empty($this->data)) {

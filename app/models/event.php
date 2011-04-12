@@ -1,7 +1,8 @@
 <?php
 
 class Event extends AppModel {
-    var $name = 'Event';   
+    var $name = 'Event';
+    var $hasMany = 'Contact';
     var $hasAndBelongsToMany = array(
         'Donor' =>
             array(
