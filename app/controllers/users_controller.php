@@ -109,7 +109,7 @@ class UsersController extends AppController {
 	    if ($userinfo['User']['admin']=='1') {
 		    $this->User->delete($id);
 		    $this->Session->setFlash('User Successfully Deleted.');
-				$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action'=>'index'));
 	    } else {
 		    $this->Session->setFlash('Only Administrators Can Delete Users. Please Authenticate As An Administrator And Try Again.');
 		    $this->redirect(array('action'=>'login'));
