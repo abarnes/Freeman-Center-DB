@@ -59,8 +59,9 @@ class UsersController extends AppController {
 	    $userinfo = $this->Auth->user();
 		if ($userinfo['User']['admin']=='1') {
 			if ($userinfo['User']['admin']=='0') {
-			$this->Session->setFlash('Only Administrators Can Add Users. Please Authenticate As An Administrator And Try Again.');
-			$this->redirect(array('action'=>'login'));
+				$this->Session->setFlash('Only Administrators Can Add Users. Please Authenticate As An Administrator And Try Again.');
+				$this->redirect(array('action'=>'login'));
+			}
 		}
 	    //die(print_r($userinfo));
 	    if ($userinfo['User']['admin']=='1' || $userinfo['User']['id']==$id) {

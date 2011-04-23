@@ -1,9 +1,9 @@
-<div style="width:100%;margin-right:auto;margin-left:auto;text-align:center;">
-    
+<div style="width:400px;text-align:left;float:left;">
+    <br/>
 <?php
     echo $form->create('User', array('action' => 'login'));
-    echo $form->input('username', array( 'label' => 'User: '));
-    echo $form->input('password', array('label'=>'Password: '));
+    echo $form->input('username', array( 'label' => '<h4>Username: </h4>'));
+    echo $form->input('password', array('label'=>'<h4>Password: </h4>'));
     echo $form->end('Login');
 ?>
 <br/>
