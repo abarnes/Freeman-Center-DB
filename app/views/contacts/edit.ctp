@@ -6,7 +6,7 @@
     <tr><td style="text-align:right;font-size:80%;">Donor: </td><td><?php echo $form->input('donor_id', array( 'label' => '')); ?></td></tr>
     <tr><td style="text-align:right;font-size:80%;">Date: </td><td><?php echo $form->input('date', array( 'label' => '')); ?></td></tr>
     <tr><td style="text-align:right;font-size:80%;">Type: </td><td><?php echo $form->input('type', array( 'label' => '','options'=>array('email'=>'email','phone'=>'phone','mail'=>'mail','in person'=>'in person','at event'=>'at event','other'=>'other'))); ?></td></tr>
-    <tr><td style="text-align:right;font-size:80%;">Event (if contacted at an event): </td><td><?php echo $form->input('ev', array( 'label' => '','options'=>$events,'value'=>'0')); ?></td></tr>
+    <tr><td style="text-align:right;font-size:80%;">Event (if contacted at an event): </td><td><?php echo $form->input('event_id', array( 'label' => '')); ?></td></tr>
     <tr><td style="text-align:right;font-size:80%;">Donation: $</td><td><?php echo $form->input('donation', array( 'label' => '')); ?></td></tr>
     <tr><td style="text-align:right;font-size:80%;">Notes: </td><td><?php echo $form->input('notes', array('label'=>'')); ?></td></tr>
     <tr><td></td><td>

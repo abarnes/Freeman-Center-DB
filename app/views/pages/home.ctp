@@ -6,7 +6,7 @@
 Welcome to the Freeman Center Donor Database.<br/><br/>
 
 Login to Continue<br/><br/>
-
+(for testing, login with username "freeman" and password "password")
 
 <div style="width:30%;margin-right:auto;margin-left:auto;text-align:left;float:left;">
     

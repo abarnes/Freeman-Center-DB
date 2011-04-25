@@ -1,25 +1,37 @@
-<h2><?php echo $e['Event']['name']; ?></h2>
+<h2>Contact Details</h2>
 
-<?php echo $html->link('Edit Event',array('action'=>'edit/'.$e['Event']['id'])); ?>
+<div class="link">
+<a href="javascript: history.go(-1)"><< Back</a>
+<span style="margin-left:30px;"><?php echo $html->link('Edit Contact',array('action'=>'edit/'.$e['Contact']['id'])); ?></span>
+</div>
 <br/>
 
 <table>
     <tr>
         <td>
-            Date
+            Date:
         </td>
         <td>
-            <?php echo date('d-m-Y',strtotime($e['Event']['date'])); ?>
+            <?php echo date('F j, Y',strtotime($e['Contact']['date'])); ?>
         </td>
     </tr>
     <tr>
         <td>
-            Attendees:
+            Type:
         </td>
         <td>
-        <?php foreach ($e['Donor'] as $d) {
-            echo $d['name'];
-        } ?>
+            <?php echo $e['Contact']['type']; ?>
+            <?php if ($e['Contact']['type']=='at event') {
+                    echo ' - '.$e['Event']['name'];
+                } ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Donation:
+        </td>
+        <td>
+            $<?php echo $e['Contact']['donation']; ?>
         </td>
     </tr>
 </table>

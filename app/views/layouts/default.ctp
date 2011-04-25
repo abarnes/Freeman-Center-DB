@@ -26,6 +26,7 @@
 		<?php if ($aut==true) { ?>
 			<?php if ($admin==true) { ?>
 				<ul class="top-nav">
+					<li><?php echo $html->link('Search',array('controller'=>'donors','action'=>'search')); ?></li>
 					<li><?php echo $html->link('Donors',array('controller'=>'donors','action'=>'index')); ?></li>
 					<li><?php echo $html->link('Contact',array('controller'=>'contacts','action'=>'index')); ?></li>
 					<li><?php echo $html->link('Events',array('controller'=>'events','action'=>'index')); ?></li>
@@ -34,6 +35,7 @@
 				</ul>
 			<?php } else { ?>
 				<ul class="top-nav">
+					<li><?php echo $html->link('Search',array('controller'=>'donors','action'=>'search')); ?></li>
 					<li><?php echo $html->link('Donors',array('controller'=>'donors','action'=>'index')); ?></li>
 					<li><?php echo $html->link('Contact',array('controller'=>'contacts','action'=>'index')); ?></li>
 					<li><?php echo $html->link('Events',array('controller'=>'events','action'=>'index')); ?></li>

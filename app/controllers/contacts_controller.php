@@ -13,15 +13,30 @@ class ContactsController extends AppController {
         
 	
 	function index () {
-		$this->set('contact',$this->Contact->find('all'));
+		$this->paginate = array(
+		     'order' => array('Contact.created DESC'),
+		    'limit' => 22
+		);
+		$data = $this->paginate('Contact');
+		$this->set('contact',$data);
 	}
 	
-	function add() {
+	function add($id=null) {
 		$ev = $this->Donor->Event->find('list',array('order'=>'Event.date DESC'));
 		$ev[0]='none';
 		$this->set('events', $ev);
 		$this->set('donors', $this->Donor->find('list',array('order'=>'Donor.name ASC')));
+		
+		//add contact for a person
+		if ($id!='') {
+			$this->set('def',$id);
+		} else {
+			$this->set('def','');
+		}
 		if (!empty($this->data)) {
+			if ($this->data['Contact']['type']=='at event') {
+				$this->data['Contact']['event_id']=$this->data['Contact']['ev'];
+			}
 			//die(print_r($this->data));
 			if ($this->Contact->save($this->data)) {
 				$this->Session->setFlash("Contact Saved");
@@ -36,6 +51,7 @@ class ContactsController extends AppController {
 		$this->set('id',$id);
 		$this->Contact->id = $id;
 		$this->set('events', $this->Event->find('list',array('order'=>'Event.date DESC')));
+		$this->set('donors', $this->Donor->find('list',array('order'=>'Donor.name ASC')));
 		if (empty($this->data)) {
 			$this->data = $this->Contact->read();
 		} else {
@@ -52,6 +68,11 @@ class ContactsController extends AppController {
 		$this->Contact->delete($id);
 		$this->Session->setFlash('Contact Successfully Deleted.');
 		$this->redirect(array('action'=>'index'));
+	}
+	
+	function view($id) {
+		$contact = $this->Contact->findById($id);
+		$this->set('e',$contact);
 	}
     
 }

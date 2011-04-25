@@ -21,5 +21,13 @@ class Event extends AppModel {
                 'insertQuery'            => ''
             )
     );
+    var $validate = array(
+        'name' => array(
+           'rule' => array('minLength', 1),
+           'required' => true,
+           'message' => 'A Name Must Be Provided.'
+        )
+    );
+    
 }
 ?>

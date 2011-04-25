@@ -17,6 +17,11 @@ div.link a {
     color:white;
 }
 
+.link2 a {
+    color:white;
+    text-decoration:none;
+}
+
 .submits {
 	background:#62af56;
 	background: -webkit-gradient(linear, left top, left bottom, from(#a8ea9c), to(#62af56));

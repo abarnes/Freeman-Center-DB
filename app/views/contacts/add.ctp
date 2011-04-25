@@ -3,7 +3,13 @@
     <table style="border:0px solid black;margin-right:auto;margin-left:auto;">
     
     <?php echo $form->create('Contact', array('action' => 'add')); ?>
-    <tr><td style="text-align:right;font-size:80%;">Donor: </td><td><?php echo $form->input('donor_id', array( 'label' => '')); ?></td></tr>
+    
+    <?php if ($def!='') { ?>
+        <tr><td style="text-align:right;font-size:80%;">Donor: </td><td><?php echo $form->input('donor_id', array( 'label' => '','default'=>$def)); ?></td></tr>
+    <?php } else { ?>
+        <tr><td style="text-align:right;font-size:80%;">Donor: </td><td><?php echo $form->input('donor_id', array( 'label' => '')); ?></td></tr>
+    <?php } ?>    
+    
     <tr><td style="text-align:right;font-size:80%;">Date: </td><td><?php echo $form->input('date', array( 'label' => '')); ?></td></tr>
     <div id="1" class="hide">
         <tr><td style="text-align:right;font-size:80%;">Type: </td><td><?php echo $form->input('type', array( 'label' => '','id'=>'typ','onchange'=>'change()','options'=>array('email'=>'email','phone'=>'phone','mail'=>'mail','in person'=>'in person','at event'=>'at event','other'=>'other'))); ?></td></tr>

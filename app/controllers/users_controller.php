@@ -8,12 +8,11 @@ class UsersController extends AppController {
 	var $components = array('Auth','Session');
         
         function beforeFilter() {
+		$this->Auth->loginRedirect = array('controller' => 'donors', 'action' => 'index');
             $this->Auth->allow('login');
         }
 	
         function login() {
-		//$this->set('options',$this->User->find('list',array('fields'=>array('User.username','User.username'),'order'=>'User.username ASC')));
-		$this->Auth->redirect(array('controller' => 'users', 'action' => 'index'));
 	}
 
 	function logout() {
@@ -21,7 +20,12 @@ class UsersController extends AppController {
 	}
 	
 	function index () {
-		$this->set('user',$this->User->find('all'));
+		$this->paginate = array(
+		     'order' => array('User.username ASC'),
+		    'limit' => 22
+		);
+		$data = $this->paginate('User');
+		$this->set('user',$data);
 	}
 	
 	function add() {

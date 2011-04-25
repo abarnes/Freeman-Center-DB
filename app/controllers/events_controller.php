@@ -4,7 +4,7 @@ class EventsController extends AppController {
 	var $name = 'Events';
         //var $layout = 'default';
 	var $helpers = array('Html', 'Form', 'Time', 'javascript');
-	//var $uses = array('Choice','Race','Driver','Year','DriversYear','User','Record','Place');
+	var $uses = array('Event','Contact','Donor');
 	var $components = array('Auth','Session');
         
         function beforeFilter() {
@@ -12,10 +12,16 @@ class EventsController extends AppController {
         }
 	
 	function index () {
-		$this->set('event',$this->Event->find('all'));
+		$this->paginate = array(
+		     'order' => array('Event.date DESC'),
+		    'limit' => 22
+		);
+		$data = $this->paginate('Event');
+		$this->set('event',$data);
 	}
 	
 	function add() {
+		$this->set('donors', $this->Event->Donor->find('list',array('order'=>'Donor.name DESC')));
 		if (!empty($this->data)) {
 			if ($this->Event->save($this->data)) {
 				$this->Session->setFlash('"'.$this->data['Event']['name'] . '" Successfully Added.');
@@ -32,6 +38,7 @@ class EventsController extends AppController {
 	    $userinfo = $this->Auth->user();
 	    //die(print_r($userinfo));
 	    if ($userinfo['User']['admin']=='1') {
+		$this->set('donors', $this->Event->Donor->find('list',array('order'=>'Donor.name DESC')));	
 		    if (empty($this->data)) {
 			    $this->data = $this->Event->read();
 		    } else {
@@ -47,7 +54,17 @@ class EventsController extends AppController {
 	}
 	
 	function view($id) {
-		$this->set('e',$this->Event->findById($id));
+		$e = $this->Event->findById($id);
+		$this->set('e',$e);
+	
+		$f = $this->Contact->find('all',array('conditions'=>array('Contact.event_id'=>$id)));
+		//die(print_r($f));
+		$sum = 0;
+		foreach ($f as $f) {
+			$sum = $sum+$f['Contact']['donation'];
+		}
+		$this->set('sum',$sum);
+		
 	}
     
 	function delete($id) {
