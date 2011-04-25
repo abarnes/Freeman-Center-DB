@@ -43,7 +43,7 @@ class DonorsController extends AppController {
 		} else {
 			if ($this->Donor->save($this->data)) {
 				$this->Session->setFlash('Donor Has Been Updated.');
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('action'=>'view/'.$id));
 			} else {
 				$this->Session->setFlash('Error: Failed to Save');
 			}
