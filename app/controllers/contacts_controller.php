@@ -34,6 +34,9 @@ class ContactsController extends AppController {
 			$this->set('def','');
 		}
 		if (!empty($this->data)) {
+			if ($this->data['Contact']['donation']=='') {
+				$this->data['Contact']['donation']='0.00';
+			}
 			if ($this->data['Contact']['type']=='at event') {
 				$this->data['Contact']['event_id']=$this->data['Contact']['ev'];
 				
