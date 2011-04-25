@@ -44,8 +44,6 @@ class ContactsController extends AppController {
 					$data['DonorsEvent']['event_id']=$this->data['Contact']['ev'];
 					$data['DonorsEvent']['donor_id']=$this->data['Contact']['donor_id'];
 					$this->DonorsEvent->save($data);
-				} else {
-					echo 'already';
 				}
 			}
 			//die(print_r($this->data));
