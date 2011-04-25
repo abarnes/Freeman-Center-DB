@@ -4,7 +4,7 @@ class ContactsController extends AppController {
 	var $name = 'Contacts';
         //var $layout = 'default';
 	var $helpers = array('Html', 'Form', 'Time', 'javascript');
-	var $uses = array('Contact','Event','Donor');
+	var $uses = array('Contact','Event','Donor','DonorsEvent');
 	var $components = array('Auth','Session');
         
         function beforeFilter() {
@@ -36,6 +36,17 @@ class ContactsController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->data['Contact']['type']=='at event') {
 				$this->data['Contact']['event_id']=$this->data['Contact']['ev'];
+				
+				$c = $this->DonorsEvent->find('count',array('conditions'=>array('DonorsEvent.event_id'=>$this->data['Contact']['ev'],'DonorsEvent.donor_id'=>$this->data['Contact']['donor_id'])));
+				if ($c==0) {
+					$this->DonorsEvent->create();
+					$data = array();
+					$data['DonorsEvent']['event_id']=$this->data['Contact']['ev'];
+					$data['DonorsEvent']['donor_id']=$this->data['Contact']['donor_id'];
+					$this->DonorsEvent->save($data);
+				} else {
+					echo 'already';
+				}
 			}
 			//die(print_r($this->data));
 			if ($this->Contact->save($this->data)) {
